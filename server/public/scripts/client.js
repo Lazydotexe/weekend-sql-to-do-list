@@ -6,7 +6,7 @@ $(document).ready(function () {
 });
 
 function addClickHandlers() {
-    $('#submit').on('click', addToDo)
+    $('#submit').on('click', addToDo) // Button labled submit will run 'addToDo' on click
 
 
 
@@ -17,8 +17,9 @@ function addClickHandlers() {
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//         POST
-
+//         POST     // this will take the values from the inputs and bundle them up as objects
+                    // and send them via POST on the server route.
+                    // ** addToDo WILL run 'refreshToDo' whenever called. **
 function addToDo() {
     console.log('Add button clicked.');
     let newToDo = {};
@@ -33,7 +34,7 @@ function addToDo() {
         data: newToDo,
     }).then(function (response) {
         console.log('Response from server.', response);
-        //   refreshList();
+        refreshToDo() // **     CALLS REFRESHTODO FUNTCION     **
     }).catch(function (error) {
         console.log('Error in POST', error)
         alert('Unable to add item at this time. Please try again later.');
