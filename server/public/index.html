@@ -11,8 +11,49 @@
 </head>
 
 <body>
-    <p>TESTING</p>
+    <h1>Todo List</h1>
+    <label>
+        Task:
+        <input id="taskInput" type="text" name="task" required>
+    </label>
+    <label>
+        Due Date:
+        <input id="dateInput" type="date" name="dueDate">
+    </label>
+    <label>
+        Description:
+        <input id="descriptionInput" type="text" name="description" required>
+    </label>
+    <button id="submit" type="submit">Add Task</button>
+    <table id="todo-table">
+        <thead>
+            <tr>
+                
+                <th>Task</th>
+                <th>Due Date</th>
+                <th>Description</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Placeholder for dynamic rows from database -->
+            <tr>
+                <td>Deez Nutz</td>
+                <td>2023-08-01</td>
+                <td>This is a test desctiption</td>
+                <td><input type="checkbox" class="completed-checkbox"></td>
+                
+                <td class="actions">
+                    <button>Mark As Done</button>
+                    <button>Delete</button>
+                </td>
+                
+              </tr>
+        </tbody>
+    </table>
 
+    
 </body>
 
 </html>
