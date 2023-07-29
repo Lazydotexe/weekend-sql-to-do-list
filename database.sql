@@ -14,3 +14,8 @@ VALUES
   ('Finish weekend project', '2023-07-30', FALSE, 'Make sure project is done by 6:00 pm'),
   ('Feed tacocat', '2023-01-08', FALSE, 'He has not been fed in 20 years'),
   ('Workout', '2023-08-03', FALSE, 'Lower body');
+
+
+
+
+    UPDATE "TODO" SET "completed" = TRUE WHERE "id" = 5;
