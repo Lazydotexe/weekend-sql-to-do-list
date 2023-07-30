@@ -7,6 +7,8 @@ $(document).ready(function () {
 
 function addClickHandlers() {
     $('#submit').on('click', addToDo) // Button labled submit will run 'addToDo' on click
+    $('#todoList').on('click', '#btn-complete', completeTask)
+    $('#todoList').on('click', '#btn-delete', deleteTask)
 
 
 
@@ -24,7 +26,6 @@ function addToDo() {
     console.log('Add button clicked.');
     let newToDo = {};
     newToDo.task = $('#taskInput').val();
-    newToDo.date = $('#dateInput').val();
     newToDo.description = $('#descriptionInput').val();
     newToDo.completed = false;
 
@@ -62,9 +63,9 @@ function refreshToDo() {
 
 
 function completeTask() {
-    const taskId = $(this).parent().parent().data('id')
+    const taskId = $(this).parent().parent().data('id') 
 
-    console.log("mark as read:", taskId)
+    console.log("mark as complete:", taskId)
 
 
     $.ajax({
@@ -97,7 +98,7 @@ function deleteTask() {
     })
         .then((reponse) => {
             console.log(`Deleted book id: ${taskId}`)
-            refreshToDo()
+            refreshToDo()   
         })
 }
 
@@ -115,12 +116,11 @@ function render(lists) {
         let newRow = $(`
       <tr>
          <td>${list.task}</td>
-         <td>${list.due_date}</td>
          <td>${list.Description}</td>
          <td><input type="checkbox" class="completed-checkbox">${list.completed}</td>
          <td class="actions">
-          <button>Mark As Done</button>
-          <button>Delete</button>
+          <button id ="btn-complete">Complete</button>
+          <button id="btn-delete">Delete</button>
          </td>
       
       </tr>
@@ -129,7 +129,7 @@ function render(lists) {
 
         newRow.data('id', list.id);
 
-        // if (koala.ready_to_transfer === true) {
+        // if (list.completed === true) {
         //     // If true, remove the "Mark For Ready" button
         //     newRow.find('.btn-ready').remove();
         // }

@@ -13,9 +13,9 @@ router.post('/',  (req, res) => {
     let newToDo = req.body;
     console.log(`Adding book`, newToDo);
   
-    let queryText = `INSERT INTO "TODO" ("task", "due_date", "Description", "completed")
-                     VALUES ($1, $2, $3, $4);`;
-    pool.query(queryText, [newToDo.task, newToDo.due_date, newToDo.description, newToDo.completed])
+    let queryText = `INSERT INTO "TODO" ("task", "Description", "completed")
+                     VALUES ($1, $2, $3);`;
+    pool.query(queryText, [newToDo.task,  newToDo.description, newToDo.completed])
       .then(result => {
         res.sendStatus(201);
       })
@@ -28,7 +28,8 @@ router.post('/',  (req, res) => {
 
     //        GET
     router.get('/', (req, res) => {
-        let queryText = `SELECT "task", TO_CHAR(due_date, 'DD Mon YYYY') AS "due_date", "completed", "Description" FROM "TODO" ;`;
+        let queryText = `SELECT * FROM "TODO"
+        ORDER BY "task" DESC;`;
         pool.query(queryText).then(result => {
           // Sends back the results in an object
           res.send(result.rows);
@@ -69,7 +70,7 @@ router.post('/',  (req, res) => {
 router.delete('/:id', (req, res) => {
     let taskToDeleteId = req.params.id
   
-    let queryText = 'DELETE FROM TODO WHERE id=$1;'
+    let queryText = 'DELETE FROM "TODO" WHERE id=$1;'
   
     pool.query(queryText, [taskToDeleteId])
         .then((result) => {
