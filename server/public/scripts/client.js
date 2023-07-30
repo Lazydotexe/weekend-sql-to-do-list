@@ -28,6 +28,7 @@ function addToDo() {
     newToDo.task = $('#taskInput').val();
     newToDo.description = $('#descriptionInput').val();
     newToDo.completed = false;
+    $('input').val("")
 
     $.ajax({
         type: 'POST',
@@ -107,33 +108,45 @@ function deleteTask() {
 //          RENDER
 function render(lists) {
     $('#todoList').empty();
-
-
+  
     for (let i = 0; i < lists.length; i += 1) {
-
-        let list = lists[i];
-
-        let newRow = $(`
-      <tr>
-         <td>${list.task}</td>
-         <td>${list.Description}</td>
-         <td><input type="checkbox" class="completed-checkbox">${list.completed}</td>
-         <td class="actions">
-          <button id ="btn-complete">Complete</button>
-          <button id="btn-delete">Delete</button>
-         </td>
-      
-      </tr>
-        
-        `)
-
-        newRow.data('id', list.id);
-
-        // if (list.completed === true) {
-        //     // If true, remove the "Mark For Ready" button
-        //     newRow.find('.btn-ready').remove();
-        // }
-
-        $('#todoList').append(newRow);
+      let list = lists[i];
+  
+      // Convert the completed value to 'Yes' or 'No' string
+      let convertToString;
+    switch (list.completed) {
+      case true:
+        convertToString = 'Yes';
+        break;
+      case false:
+        convertToString = 'No';
+        break;
     }
-}
+  
+      let newRow = $(`
+        <tr>
+          <td>${list.task}</td>
+          <td>${list.Description}</td>
+          <td><input type="checkbox" class="completed-checkbox" ${list.completed ? 'checked' : ''}>${convertToString}</td>
+          <td class="actions">
+            <button id="btn-complete">Complete</button>
+            <button id="btn-delete">Delete</button>
+          </td>
+        </tr>
+      `);
+  
+      newRow.data('id', list.id);
+  
+      if (list.completed) { // if true the newRow will add the class from css and change the background to green
+        newRow.addClass('completed-row');
+      }
+  
+      $('#todoList').append(newRow);
+    }
+  }
+
+
+
+
+
+

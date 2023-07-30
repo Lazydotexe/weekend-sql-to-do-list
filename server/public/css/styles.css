@@ -31,3 +31,7 @@ tr:hover {
 input {
     margin-bottom: 20px;
 }   
+
+.completed-row {
+    background-color: #d9f0d9; 
+  }
