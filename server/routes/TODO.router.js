@@ -15,8 +15,6 @@ will run once we send it with the pool.query command.
 it will basically add our two inputs from the DOM plus a FALSE value added
 behind the scenes to our table in the database.
 */
-
-
 router.post('/', (req, res) => {
   let newToDo = req.body;
   console.log(`Adding book`, newToDo);
@@ -33,7 +31,6 @@ router.post('/', (req, res) => {
     });
 });
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-
 //        GET
 
 /*This is our GET route that sends another command to our database packed into the variable
@@ -53,7 +50,6 @@ router.get('/', (req, res) => {
 });
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-
 //        PUT
 
 /* The PUT route will take the id sent from the client and set it to 'taskId'.
@@ -83,7 +79,6 @@ router.put('/:id', (req, res) => {
 })
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-
 //           DELETE
 /* Our DELETE route does about the same thing as our PUT except instead of changing a value it deletes 
 the whole row depending on what button/id is clicked on DOM */
@@ -104,15 +99,4 @@ router.delete('/:id', (req, res) => {
     })
 })
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
 module.exports = router;
