@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="vendors/jquery.js"></script>
+    <script type="text/javascript" src="scripts/client.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>To Do App</title>
+</head>
+
+<body>
+    <h1>Todo List</h1>
+    <label>
+        Task:
+        <input id="taskInput" type="text" name="task" required>
+    </label>
+    <label>
+        Description:
+        <input id="descriptionInput" type="text" name="description" required>
+    </label>
+    <button id="submit" type="submit">Add Task</button>
+    <table id="todo-table">
+        <thead>
+            <tr>
+                
+                <th>Task</th>
+                <th>Description</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="todoList">
+            <!-- Placeholder rows from database -->
+        </tbody>
+    </table>
+
+    
+</body>
+
+</html>
