@@ -15,8 +15,8 @@ function addClickHandlers() {
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //         POST     // this will take the values from the inputs and bundle them up as objects
-                    // and send them via POST on the server route.
-                    // ** addToDo WILL run 'refreshToDo' whenever called. **
+// and send them via POST on the server route.
+// ** addToDo WILL run 'refreshToDo' whenever called. **
 function addToDo() {
     console.log('Add button clicked.');
     let newToDo = {};
@@ -40,6 +40,8 @@ function addToDo() {
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 //         GET
+// Sends GET request to our router. Saves the response as the variable 'list'
+// then calls the function render(list) with our 'list' as a perameter.
 
 function refreshToDo() {
     $.ajax({
@@ -56,10 +58,12 @@ function refreshToDo() {
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 //         PUT
-
+// sets a variable to the data('id') that is included in our GET but not rendered to the DOM
+// 'this' is the button and it references its parent.parent element which is a <tr>
+// Then a PUT request is sent to our router with our new variable as a destination.
 
 function completeTask() {
-    const taskId = $(this).parent().parent().data('id') 
+    const taskId = $(this).parent().parent().data('id')
 
     console.log("mark as complete:", taskId)
 
@@ -79,12 +83,12 @@ function completeTask() {
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 //          DELETE
-
+// creastes the same situation with the 'id' except we are sending a DELETE request to our router now.
+// again we are accessing the `/TODO/${taskId}` url as we did in our PUT.
 
 function deleteTask() {
     console.log("You clicked on: ", $(this))
 
-    // getter
     const taskId = $(this).parent().parent().data('id')
     console.log("in deleteTask: id is...", taskId)
 
@@ -92,53 +96,64 @@ function deleteTask() {
         method: 'DELETE',
         url: `/TODO/${taskId}`
     })
-        .then((reponse) => {
+        .then((response) => {
             console.log(`Deleted book id: ${taskId}`)
-            refreshToDo()   
+            refreshToDo()
         })
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //          RENDER
+// first we empty our #todoList so that we dont keep stacking the same information over and over.
+// Our render function takes in our list/response from our GET request so that we can render the Data
+// that we reeived to our DOM. We itirate through our 'list' first checking if our list.completed is
+// equil to true or false and set our variable accordingly.
+// while also appending our variable newRow that has a string interpolation which includes our objects
+// inside our 'list' variable.
+// line 140 is a ternary operator(shorthand if/else statement) that is placed in line with the html
+// and is in charge of whether to check to complete box or not depending on the switch statement we
+// run on line 126
+
+
 function render(lists) {
     $('#todoList').empty();
-  
+
     for (let i = 0; i < lists.length; i += 1) {
-      let list = lists[i];
-  
-      // Convert the completed value to 'Yes' or 'No' string
-      let convertToString;
-    switch (list.completed) {
-      case true:
-        convertToString = 'Yes';
-        break;
-      case false:
-        convertToString = 'No';
-        break;
-    }
-  
-      let newRow = $(`
+        let list = lists[i];
+
+        // Convert the completed value to 'Yes' or 'No' string
+        let convertToString;
+        switch (list.completed) {
+            case true:
+                convertToString = 'Yes';
+                break;
+            case false:
+                convertToString = 'No';
+                break;
+        }
+        //ternary operator line 140
+        let newRow = $(`
         <tr>
           <td>${list.task}</td>
           <td>${list.Description}</td>
-          <td><input type="checkbox" class="completed-checkbox" ${list.completed ? 'checked' : ''}>${convertToString}</td>
+          <td><input type="checkbox" class="completed-checkbox" ${list.completed ? 'checked' : ''}>${convertToString}</td> 
           <td class="actions">
             <button id="btn-complete">Complete</button>
             <button id="btn-delete">Delete</button>
           </td>
         </tr>
       `);
-  
-      newRow.data('id', list.id);
-  
-      if (list.completed) { // if true the newRow will add the class from css and change the background to green
-        newRow.addClass('completed-row');
-      }
-  
-      $('#todoList').append(newRow);
+
+        newRow.data('id', list.id);
+
+        if (list.completed) { // if true the newRow will add the class from css and change the background to green
+            newRow.addClass('completed-row');
+        }
+
+        $('#todoList').append(newRow);
     }
-  }
+}
 
 
 

@@ -1,6 +1,7 @@
 # Project Name
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+TODO app
+
 
 ## Description
 # Task Manager App Readme
@@ -41,16 +42,20 @@ Follow these instructions to run the Task Manager app on your local machine:
 3. Install the required dependencies by running:
 
    ```
+   npm install express
+   npm install pg
    npm install
+
+   * Add to your package.json
+   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
+  },
    ```
 
 ### Configuration
 
-1. Create a new file named `.env` in the root of the project.
-
-2. Define your database configuration in the `.env` file. For example:
-
-   - Table template information and commands are saved in gatabase.sql
+1. Table template information and commands are saved in gatabase.sql
 
 ### Running the App
 
