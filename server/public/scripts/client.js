@@ -9,11 +9,6 @@ function addClickHandlers() {
     $('#submit').on('click', addToDo) // Button labled submit will run 'addToDo' on click
     $('#todoList').on('click', '#btn-complete', completeTask)
     $('#todoList').on('click', '#btn-delete', deleteTask)
-
-
-
-
-    // TODO - Add code for edit & delete buttons
 }
 
 
