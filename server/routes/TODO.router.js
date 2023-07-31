@@ -62,12 +62,12 @@ router.put('/:id', (req, res) => {
   console.log("Req.params: ", req.params)
 
   let taskId = req.params.id
-  let completed = 'TRUE';
-  let queryParams = [completed, taskId]
+  
+  let queryParams = [taskId]
 
-  let queryText = `UPDATE "TODO" SET "completed" = $1 WHERE "id" = $2;`
-  // console.log(`Success connecting to /updaterank. taskId = ${taskId}, completed = ${completed}`)
-
+  let queryText =  `
+  UPDATE "TODO" SET "completed" = NOT "completed" WHERE "id"=$1
+`
   pool.query(queryText, queryParams)
     .then((resposne) => {
       res.sendStatus(200)
