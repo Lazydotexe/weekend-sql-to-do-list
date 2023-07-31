@@ -4,7 +4,7 @@ TODO app
 
 
 ## Description
-# Task Manager App Readme
+# TODO App Readme
 
 The TODO app is a simple web application that allows users to input tasks and their descriptions, which are then stored in a database. The app provides an intuitive interface to add, complete, and delete tasks. This README provides an overview of the app's features and instructions on how to set it up and use it.
 
